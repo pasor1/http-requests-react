@@ -1,16 +1,18 @@
 import React from 'react';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
-import StyleChecker from '../../components/StyleChecker/StyleChecker';
+import BaseStylePanorama from '../../components/BaseStylePanorama/BaseStylePanorama';
 
 
 const layout = (props) => {
   return (
     <>
       <Header />
-      {props.children}
+      <div className="main-content max-w-screen-lg mx-auto">
+        {props.children}
+      </div>
       <Footer />
-      <StyleChecker />
+      {/* <BaseStylePanorama /> */}
     </>
   )
 }

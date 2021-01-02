@@ -1,17 +1,15 @@
-import React, { Component } from 'react';
-
+import React from 'react';
 import Post from '../../components/Post/Post';
 import FullPost from '../../components/FullPost/FullPost';
 import NewPost from '../../components/NewPost/NewPost';
-import './Blog.css';
 import Layout from '../Layout/Layout';
 
-class Blog extends Component {
+class Blog extends React.Component {
   render() {
     return (
       <Layout>
         <div>
-          <section className="Posts">
+          <section className="flex flex-wrap justify-center my-10">
             <Post />
             <Post />
             <Post />
