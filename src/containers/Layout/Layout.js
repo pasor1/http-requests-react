@@ -8,7 +8,7 @@ const layout = (props) => {
   return (
     <>
       <Header />
-      <div className="main-content max-w-screen-lg mx-auto">
+      <div className="main-content max-w-screen-lg mx-auto px-5">
         {props.children}
       </div>
       <Footer />
