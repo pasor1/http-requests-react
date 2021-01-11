@@ -48,4 +48,14 @@
   .btn-success {
     @apply text-gray-50 bg-green-600 border-green-700 hover:bg-green-500;
   }
+  .header li, ul{
+    @apply flex justify-end
+  }
+  .header a {
+    @apply text-white no-underline px-5 py-2 text-lg border-b-4 border-transparent opacity-80 rounded-t-md
+  }
+  .header a:active,
+  .header a:hover{
+    @apply text-white no-underline border-b-4 border-white opacity-100 bg-indigo-600
+  }
 }

@@ -1,44 +1,17 @@
 import React from 'react';
 import axios from 'axios';
-import Post from '../../components/Post/Post';
-import PostLoading from '../../components/PostLoading/PostLoading';
-import FullPost from '../../components/FullPost/FullPost';
-import NewPost from '../../components/NewPost/NewPost';
+import Posts from './Posts/Posts';
+import FullPost from './FullPost/FullPost';
+import NewPost from './NewPost/NewPost';
 import Layout from '../Layout/Layout';
 
 
 class Blog extends React.Component {
-  authors = ['Max', 'Manu', 'Paso', 'Anna'];
-  postNums = 6;
   state = {
     posts: [],
     post: {},
     postsLoading: true,
     error: false
-  }
-
-  componentDidMount() {
-    axios.get('/posts')
-      .then(response => {
-        const posts = response.data.slice(0, this.postNums);
-        const updatedPosts = posts.map((post) => {
-          return { ...post, author: this.authors[Math.floor(Math.random() * this.authors.length)] }
-        })
-        this.setState({ posts: updatedPosts, error: false, postsLoading: false });
-      })
-      .catch(error => {
-        this.setState({ error: true })
-      })
-  }
-
-  postSelectedHandler = (postId) => {
-    axios.get(`/posts/${postId}`)
-      .then(response => {
-        this.setState({ post: response.data, error: false })
-      })
-      .catch(error => {
-        this.setState({ error: true })
-      });
   }
 
   deletePostHandler = (postId) => {
@@ -57,24 +30,8 @@ class Blog extends React.Component {
     return (
       <Layout>
         <div>
-          {this.state.error
-            ? <div className="w-auto text-center bg-gradient-to-b from-red-600 to-red-400 rounded text-gray-50 m-10 p-5 shadow-lg"><h1>ERROR...</h1></div>
-            : null}
-          <section className="flex flex-wrap justify-center my-10">
-            {
-              this.state.postsLoading
-                ? Array.from({ length: this.postNums }, (e, i) => <PostLoading key={i} />)
-                : (this.state.posts.map(post => (
-                  <Post
-                    key={post.id}
-                    title={post.title}
-                    author={post.author}
-                    onclick={() => this.postSelectedHandler(post.id)} />
-                )))
-            }
-
-          </section>
-          <section>
+          <Posts />
+          {/* <section>
             <FullPost
               id={this.state.post.id}
               title={this.state.post.title}
@@ -83,7 +40,7 @@ class Blog extends React.Component {
           </section>
           <section>
             <NewPost />
-          </section>
+          </section> */}
         </div>
       </Layout >
     );
