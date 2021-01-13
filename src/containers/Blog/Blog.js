@@ -4,14 +4,23 @@ import Posts from './Posts/Posts';
 import FullPost from './FullPost/FullPost';
 import NewPost from './NewPost/NewPost';
 import Layout from '../Layout/Layout';
+import { Route } from 'react-router-dom';
 
 
 class Blog extends React.Component {
   state = {
-    posts: [],
     post: {},
-    postsLoading: true,
     error: false
+  }
+
+  postSelectedHandler = (postId) => {
+    axios.get(`/posts/${postId}`)
+      .then(response => {
+        this.setState({ post: response.data, error: false })
+      })
+      .catch(error => {
+        this.setState({ error: true })
+      });
   }
 
   deletePostHandler = (postId) => {
@@ -30,18 +39,19 @@ class Blog extends React.Component {
     return (
       <Layout>
         <div>
-          <Posts />
-          {/* <section>
+          <Route path="/" exact component={Posts} />
+          <Route path="/new-post" component={NewPost} />
+
+          <section>
             <FullPost
               id={this.state.post.id}
               title={this.state.post.title}
               content={this.state.post.body}
               onclickDelete={this.deletePostHandler} />
           </section>
-          <section>
-            <NewPost />
-          </section> */}
+
         </div>
+
       </Layout >
     );
   }

@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom';
 
 const header = () => {
   return (
@@ -7,8 +8,12 @@ const header = () => {
       <p className="text-lg font-semibold">Testing http requests with React</p>
       <nav className="max-w-screen-xl">
         <ul className="text">
-          <li><a href="/">Home</a></li>
-          <li><a href="/new-post">New Post</a></li>
+          <li><NavLink to="/" exact>Home</NavLink></li>
+          <li><NavLink to={{
+            pathname: '/new-post',
+            hash: '#submit',
+            search: '?quick-submit=true'
+          }}>New Post</NavLink></li>
         </ul>
       </nav>
     </header>

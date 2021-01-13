@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import Post from '../../../components/Post/Post';
 import PostLoading from '../../../components/PostLoading/PostLoading';
-
 class Posts extends React.Component {
   authors = ['Max', 'Manu', 'Paso', 'Anna'];
   postNums = 6;
@@ -11,16 +10,9 @@ class Posts extends React.Component {
     postsLoading: true,
     error: false
   }
-  postSelectedHandler = (postId) => {
-    axios.get(`/posts/${postId}`)
-      .then(response => {
-        this.setState({ post: response.data, error: false })
-      })
-      .catch(error => {
-        this.setState({ error: true })
-      });
-  }
+
   componentDidMount() {
+    console.log(this.props);
     axios.get('/posts')
       .then(response => {
         const posts = response.data.slice(0, this.postNums);
@@ -35,6 +27,7 @@ class Posts extends React.Component {
   }
   render() {
     return (
+
       <>
         {this.state.error
           ? <div className="w-auto text-center bg-gradient-to-b from-red-600 to-red-400 rounded text-gray-50 m-10 p-5 shadow-lg"><h1>ERROR...</h1></div>
@@ -48,7 +41,7 @@ class Posts extends React.Component {
                   key={post.id}
                   title={post.title}
                   author={post.author}
-                  onclick={() => this.postSelectedHandler(post.id)} />
+                  onclick={() => this.props.onClick(post.id)} />
               )))
           }
         </section>
