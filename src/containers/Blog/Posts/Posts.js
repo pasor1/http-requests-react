@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import Post from '../../../components/Post/Post';
 import PostLoading from '../../../components/PostLoading/PostLoading';
+import { Link } from 'react-router-dom';
+
 class Posts extends React.Component {
   authors = ['Max', 'Manu', 'Paso', 'Anna'];
   postNums = 6;
@@ -12,7 +14,6 @@ class Posts extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
     axios.get('/posts')
       .then(response => {
         const posts = response.data.slice(0, this.postNums);
@@ -37,11 +38,11 @@ class Posts extends React.Component {
             this.state.postsLoading
               ? Array.from({ length: this.postNums }, (e, i) => <PostLoading key={i} />)
               : (this.state.posts.map(post => (
-                <Post
-                  key={post.id}
-                  title={post.title}
-                  author={post.author}
-                  onclick={() => this.props.onClick(post.id)} />
+                <Link to={`/post/${post.id}`} key={post.id}>
+                  <Post
+                    title={post.title}
+                    author={post.author} />
+                </Link>
               )))
           }
         </section>

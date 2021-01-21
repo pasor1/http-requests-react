@@ -9,11 +9,7 @@ const header = () => {
       <nav className="max-w-screen-xl">
         <ul className="text">
           <li><NavLink to="/" exact>Home</NavLink></li>
-          <li><NavLink to={{
-            pathname: '/new-post',
-            hash: '#submit',
-            search: '?quick-submit=true'
-          }}>New Post</NavLink></li>
+          <li><NavLink to="/new-post">New Post</NavLink></li>
         </ul>
       </nav>
     </header>
